@@ -61,7 +61,56 @@ def busqueda_precio(p_min, p_max, prendas, bodega):
     for prenda in prenda_encontrada:
         print(prenda)
     
-            
+def buscar_codigo(codigo):
+
+    if codigo in bodega:
+        return True
+    else:
+        print("El codigo no existe")
+        return False
+    
+def actualizar_precio(codigo, nuevo_precio):
+    if buscar_codigo(codigo) == True:
+        bodega[codigo][0] = nuevo_precio
+        return True
+    else:
+        return False
+    
+def validar_codigo(codigo):
+    return codigo.strip() != "" and not buscar_codigo()
+
+def validar_nombre(nombre):
+    return nombre.strip() != ""
+
+def validar_categoria(categoria):
+    return categoria.strip() != ""
+
+def validar_talla(talla):
+    return talla.strip() != ""
+
+def validar_color(color):
+    return color.strip() != ""
+
+def validar_material(material):
+    return material.strip() != ""
+
+def validar_es_unisex(es_unisex):
+    return es_unisex.lower() in ["s","n"]
+
+def validar_precio(precio):
+    try:
+        precio = int(precio)
+        return precio > 0
+    except:
+        return False
+
+def validar_unidades(unidades):
+    try:
+        unidades = int(unidades)
+        return unidades > 0
+    except:
+        return False
+
 while True:
     opcion = leer_opcion()
 
@@ -75,6 +124,19 @@ while True:
         except ValueError:
             print("Ingrese una variable valida")
         busqueda_precio(p_min, p_max, prendas, bodega)
+    elif opcion == 3:
+        codigo = input("Ingrese el codigo de la prenda que desea actualizar: ")
+
+        try:
+            nuevo_precio = int(input("Ingrese el nuevo precio de la prenda: "))
+            
+        except ValueError:
+            print("Ingrese una variable valida")
+        actualizar_precio(codigo, nuevo_precio)
+    elif opcion == 4:
+        pass
+    elif opcion == 5:
+        pass
     elif opcion == 6:
         print( "Programa finalizado.")
         break
