@@ -49,12 +49,19 @@ def unidades_categorias(categoria):
             total_unidades += bodega[codigo][1]
     print(f"categoria seleccionada: {categoria} tiene {total_unidades} en total")
 
-
-
-
-
-
-
+def busqueda_precio(p_min, p_max, prendas, bodega):
+    prenda_encontrada = []
+    for codigo, datos in bodega.items():
+        if p_min <= datos[0] and datos[0] <= p_max and datos[1] > 0:
+            nombre = prendas[codigo][0]
+            formato = f"{nombre}--{codigo}"
+            prenda_encontrada.append(formato)
+    prenda_encontrada.sort()
+    
+    for prenda in prenda_encontrada:
+        print(prenda)
+    
+            
 while True:
     opcion = leer_opcion()
 
@@ -62,7 +69,12 @@ while True:
         categoria = input("Ingrese la categoria a buscar:")
         unidades_categorias(categoria)
     elif opcion == 2:
-        pass
+        try:
+            p_min = int(input("Ingrese el precio minimo: "))
+            p_max = int(input("Ingrese precio maximo: "))
+        except ValueError:
+            print("Ingrese una variable valida")
+        busqueda_precio(p_min, p_max, prendas, bodega)
     elif opcion == 6:
         print( "Programa finalizado.")
         break
