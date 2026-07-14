@@ -111,6 +111,22 @@ def validar_unidades(unidades):
     except:
         return False
 
+def agregar_prenda(codigo, nombre, categoria, talla, color, material, es_unisex, precio, unidades):
+    if buscar_codigo(codigo):
+        return False
+    prendas[codigo] = [nombre, categoria, talla, color, material, es_unisex ]
+    bodega[codigo] = [precio, unidades]
+    return True
+
+def eliminar_prenda(codigo):
+    if buscar_codigo(codigo):
+        del prendas(codigo)
+        del bodega(codigo)
+        return True
+    else:
+        return False
+
+
 while True:
     opcion = leer_opcion()
 
@@ -125,6 +141,7 @@ while True:
             print("Ingrese una variable valida")
         busqueda_precio(p_min, p_max, prendas, bodega)
     elif opcion == 3:
+        
         codigo = input("Ingrese el codigo de la prenda que desea actualizar: ")
 
         try:
@@ -133,6 +150,7 @@ while True:
         except ValueError:
             print("Ingrese una variable valida")
         actualizar_precio(codigo, nuevo_precio)
+
     elif opcion == 4:
         pass
     elif opcion == 5:
